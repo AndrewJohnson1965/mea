@@ -1,0 +1,22 @@
+# install docker compose: sudo curl -SL https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+version: '3'
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - '27017:27017'
+volumes:
+  mongodb:
